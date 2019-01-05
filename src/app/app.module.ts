@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { ReleaseListComponent } from './components/release-list/release-list.component';
 import { ReleaseListApiService } from './services/release-list.apiservice';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
+import { ReleaseCardComponent } from './components/release-list/release-card/release-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReleaseListComponent
+    ReleaseListComponent,
+    ReleaseCardComponent
   ],
   imports: [
     BrowserModule,

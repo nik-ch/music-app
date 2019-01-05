@@ -6,4 +6,5 @@ export class ReleaseSearchResultItem {
     cover_image: string;
     year: string;
     thumb: string;
+    country: string;
 }

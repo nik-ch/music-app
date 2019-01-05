@@ -1,0 +1,17 @@
+<div class="release-card">
+    <div class="release-card__close-btn release-card__insignificant-info" (click)="closeReleaseCard()">X</div>
+    <div class="img-container release-card__img-container">
+        <img class="img-container__img" src="{{imageUrl}}" *ngIf="imageUrl" />
+        <img class="img-container__img" src="./assets/no-image-found.jpg" *ngIf="!imageUrl" />
+    </div>
+    <h2 class="release-card__title">{{release?.title}}</h2>
+    <p class="release-card__artists"><span class="release-card__insignificant-info">by</span> {{artists}}</p>
+    <p class="release-card__insignificant-info">{{release?.year}}</p>
+    <div class="tracklist release-card__tracklist">
+        <div class="track" *ngFor="let track of release?.tracklist">
+            <div class="track__position release-card__insignificant-info">{{track.position}}</div>
+            <div>{{track.title}}</div>
+            <div class="track__duration release-card__insignificant-info">{{track.duration}}</div>
+        </div>
+    </div>
+</div>

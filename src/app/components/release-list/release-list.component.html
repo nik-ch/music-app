@@ -1,3 +1,20 @@
-<div>
-    Release list component
+<div class="release-list">
+    <div class="release-card-wrapper release-list__release-card-wrapper" *ngIf="selectedRelease!=null">
+        <release-card #releaseCard
+                      [release]="selectedRelease"
+                      (releaseCardClosed)="onReleaseCardClosed($event)">
+        </release-card>
+    </div>
+    <div class="list release-list__list">
+        <div class="list-content list-content_display_flex">
+            <div class="release-item list__release-item" *ngFor="let releaseItem of releaseList">
+                <div class="img-container release-item__img-container">
+                    <img class="img-container__img" src="{{releaseItem.thumb}}" *ngIf="releaseItem.thumb" />
+                    <img class="img-container__img" src="./assets/no-image-found.jpg" *ngIf="!releaseItem.thumb" />
+                </div>
+                <div class="release-item__release-title" (click)="selectRelease(releaseItem)">{{releaseItem.title}}</div>
+                <div class="release-item__release-year">{{releaseItem.year}}</div>
+            </div>
+        </div>
+    </div>
 </div>
