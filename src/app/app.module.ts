@@ -8,12 +8,14 @@ import { ReleaseListComponent } from './components/release-list/release-list.com
 import { ReleaseListApiService } from './services/release-list.apiservice';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { ReleaseCardComponent } from './components/release-list/release-card/release-card.component';
+import { InfiniteScrollDirective } from './directives/common/infinite-scroll.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReleaseListComponent,
-    ReleaseCardComponent
+    ReleaseCardComponent,
+    InfiniteScrollDirective
   ],
   imports: [
     BrowserModule,

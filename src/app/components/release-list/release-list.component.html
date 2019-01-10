@@ -5,7 +5,8 @@
                       (releaseCardClosed)="onReleaseCardClosed($event)">
         </release-card>
     </div>
-    <div class="list release-list__list">
+    <div class="list release-list__list" infiniteScroll [apiSearchService]="releaseListApiService" 
+        [searchParams]="searchParameters" initLoadRequired="true" (dataLoaded)="onDataLoaded($event)">
         <div class="list-content list-content_display_flex">
             <div class="release-item list__release-item" *ngFor="let releaseItem of releaseList">
                 <div class="img-container release-item__img-container">

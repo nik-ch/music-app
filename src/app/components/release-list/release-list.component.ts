@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ReleaseListApiService } from "src/app/services/release-list.apiservice";
-import { ReleaseSearchResult } from "src/app/models/release-list/release-search-result";
-import { ReleaseSearchFilter } from "src/app/models/release-list/release-search-filter";
 import { ReleaseSearchResultItem } from "src/app/models/release-list/release-search-result-item";
 import { ReleaseCardComponent } from "./release-card/release-card.component";
 import { Release } from "src/app/models/release-list/release";
+import { ReleaseSearchParameters } from "src/app/models/release-list/release-search-parameters";
+import { ReleaseSearchResult } from "src/app/models/release-list/release-search-result";
 
 @Component({
     selector: "release-list",
@@ -15,18 +15,17 @@ export class ReleaseListComponent implements OnInit {
     @ViewChild("releaseCard")
     releaseCard: ReleaseCardComponent;
 
-    releaseList: ReleaseSearchResultItem[];
+    searchParameters: ReleaseSearchParameters = new ReleaseSearchParameters();
+    releaseList: ReleaseSearchResultItem[] = [];
     selectedRelease: Release;
 
-    private defaultFilter: ReleaseSearchFilter;
-
     constructor(private releaseListApiService: ReleaseListApiService) {
-        this.defaultFilter = new ReleaseSearchFilter("rock", "indie rock", "uk");
+        this.searchParameters.country = "uk";
+        this.searchParameters.style = "indie rock";
+        this.searchParameters.genre = "rock";
     }
 
     async ngOnInit() {
-        let searchResult = await this.releaseListApiService.search(this.defaultFilter);
-        this.releaseList = searchResult.results;
     }
 
     async selectRelease(item: ReleaseSearchResultItem) {
@@ -36,5 +35,8 @@ export class ReleaseListComponent implements OnInit {
     onReleaseCardClosed() {
         this.selectedRelease = null;
     }
-
+    
+    onDataLoaded(data: ReleaseSearchResult) {
+        this.releaseList.push(...data.results);
+    }
 }

@@ -1,29 +1,22 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { ReleaseSearchFilter } from "../models/release-list/release-search-filter";
+import { HttpClient } from "@angular/common/http";
 import { ReleaseSearchResult } from "../models/release-list/release-search-result";
 import { Release } from "../models/release-list/release";
+import { BasePagedSearchApiservice } from "./common/base-paged-search.apiservice";
+import { ReleaseSearchParameters } from "../models/release-list/release-search-parameters";
 
 @Injectable()
-export class ReleaseListApiService {
+export class ReleaseListApiService extends BasePagedSearchApiservice<ReleaseSearchParameters, ReleaseSearchResult> {
 
-    private apiUrl: string;
+    private apiUrl = "https://api.discogs.com";
 
-    constructor(private httpCLient: HttpClient) {
-        this.apiUrl = "https://api.discogs.com";
-    }
-
-    async search(filter: ReleaseSearchFilter): Promise<ReleaseSearchResult> {
-        return this.httpCLient
-            .get<ReleaseSearchResult>(`${this.apiUrl}/database/search`, { params: <any>filter })
-            .toPromise();
+    constructor(protected httpClient: HttpClient) {
+        super(httpClient);
     }
 
     async getReleaseItem(id: number): Promise<Release> {
-        return this.httpCLient
+        return this.httpClient
             .get<Release>(`${this.apiUrl}/releases/${id}`)
             .toPromise();
     }
-
-
 }
