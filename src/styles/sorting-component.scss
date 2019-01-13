@@ -1,0 +1,27 @@
+.sort-comp {
+    padding: 10px;
+}
+.sort-comp__inline-block {
+    margin-right: 15px;
+}
+.sort-comp__field-block {
+    display: flex;
+    align-items: center;
+}
+.sort-comp__ng-select {
+    min-width: 150px;
+}
+.sort-comp__form-elem-label {
+    margin-right: 10px;
+}
+.sort-comp__sort-svg {
+    height: 12px;
+    width: 16px;
+    cursor: pointer;
+}
+.sort-comp__sort-svg:first-of-type {
+    margin-right: 5px;
+}
+.sort-comp__sort-svg_order-selected {
+    fill: #E69139;
+}

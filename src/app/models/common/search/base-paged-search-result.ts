@@ -1,4 +1,4 @@
-import { Pagination } from "./pagination/pagination";
+import { Pagination } from "../pagination/pagination";
 
 export abstract class BasePagedSearchResult {
     pagination: Pagination;

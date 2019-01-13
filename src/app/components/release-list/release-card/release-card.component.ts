@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { Release } from "src/app/models/release-list/release";
-import { ReleaseListComponent } from "../release-list.component";
 
 @Component({
     selector: "release-card",

@@ -1,16 +1,17 @@
-import { Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { BasePagedSearchParameters } from "src/app/models/common/base-paged-search-parameters";
-import { BasePagedSearchResult } from "src/app/models/common/base-paged-search-result";
-import { BasePagedSearchApiservice } from "src/app/services/common/base-paged-search.apiservice";
+import { Directive, ElementRef, HostListener, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from "@angular/core";
+import { BasePagedSearchResult } from "src/app/models/common/search/base-paged-search-result";
+import { BaseSearchApiservice } from "src/app/services/common/base-search.apiservice";
+import { BaseSearchParameters } from "src/app/models/common/search/base-search-parameters";
+import { SortingCondition } from "src/app/models/common/sorting/sorting-condition";
 
 @Directive({
     selector: "[infiniteScroll]"
 })
 export class InfiniteScrollDirective
-    <TSearchParams extends BasePagedSearchParameters, TSearchResult extends BasePagedSearchResult> implements OnInit {
+    <TSearchParams extends BaseSearchParameters, TSearchResult extends BasePagedSearchResult> implements OnInit, OnChanges {
 
     @Input("apiSearchService")
-    apiSearchService: BasePagedSearchApiservice<TSearchParams, TSearchResult>;
+    apiSearchService: BaseSearchApiservice<TSearchParams, TSearchResult>;
 
     @Input("searchParams")
     searchParams: TSearchParams;
@@ -30,6 +31,9 @@ export class InfiniteScrollDirective
         }
     }
 
+    @Input("sortingParams")
+    sortingParams: SortingCondition;
+
     @Output()
     dataLoaded = new EventEmitter<TSearchResult>();
 
@@ -46,12 +50,23 @@ export class InfiniteScrollDirective
         }
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if(changes && changes.sortingParams) {
+            this.currentPage = 1;
+            this.totalPagesCount = 0;
+            this.load();
+        }
+    }
+
     async load() {
         this.isLoading = true;
+
         this.searchParams.page = this.currentPage;
-        if (this.itemsPerPage) {
-            this.searchParams.per_page = this.itemsPerPage;
-        }
+        this.searchParams.per_page = this.itemsPerPage;
+        this.searchParams.sort = this.sortingParams && this.sortingParams.sortingField 
+            ? this.sortingParams.sortingField.field : null;
+        this.searchParams.sort_order = this.sortingParams ? this.sortingParams.sortingOrder : null;
+        
         let data = await this.apiSearchService.search(this.searchParams)
         this.currentPage++;
         this.totalPagesCount = data.pagination.pages;
@@ -71,6 +86,4 @@ export class InfiniteScrollDirective
         return this.el.nativeElement.scrollTop + this.el.nativeElement.clientHeight 
             >= this.el.nativeElement.scrollHeight * this._startLoadingPercent / 100;
     } 
-
-
 }

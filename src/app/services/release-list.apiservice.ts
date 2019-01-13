@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ReleaseSearchResult } from "../models/release-list/release-search-result";
 import { Release } from "../models/release-list/release";
-import { BasePagedSearchApiservice } from "./common/base-paged-search.apiservice";
+import { BaseSearchApiservice } from "./common/base-search.apiservice";
 import { ReleaseSearchParameters } from "../models/release-list/release-search-parameters";
 
 @Injectable()
-export class ReleaseListApiService extends BasePagedSearchApiservice<ReleaseSearchParameters, ReleaseSearchResult> {
+export class ReleaseListApiService extends BaseSearchApiservice<ReleaseSearchParameters, ReleaseSearchResult> {
 
     private apiUrl = "https://api.discogs.com";
 

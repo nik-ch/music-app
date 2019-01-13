@@ -1,6 +1,6 @@
-import { BasePagedSearchParameters } from "./base-paged-search-parameters";
+import { BaseSearchParameters } from "./base-search-parameters";
 
-export class SearchParameters extends BasePagedSearchParameters {
+export class SearchParameters extends BaseSearchParameters {
     type: string;
     title: string;
     release_title: string;

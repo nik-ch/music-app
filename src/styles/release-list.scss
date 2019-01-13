@@ -9,7 +9,10 @@ $release-list-horizontal-padding: 220px;
 .release-list__list {
     height: 100%;
     overflow-y: auto;
-    padding: 0 220px;
+    padding: 0 $release-list-horizontal-padding;
+}
+.release-list__sort-wrapper {
+    padding: 0 $release-list-horizontal-padding;
 }
 .release-item {
     max-width: 150px;

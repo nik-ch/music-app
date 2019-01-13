@@ -1,4 +1,4 @@
-import { SearchParameters } from "../common/search-parameters";
+import { SearchParameters } from "../common/search/search-parameters";
 
 export class ReleaseSearchParameters extends SearchParameters {
     constructor() {
