@@ -1,7 +1,7 @@
 import { SortingField } from "./sorting-field";
-import { SortingOrder } from "./sorting-order";
+import { SortingOrderEnum } from "./sorting-order.enum";
 
 export class SortingCondition {
     sortingField: SortingField;
-    sortingOrder: SortingOrder;
+    sortingOrder: SortingOrderEnum;
 }

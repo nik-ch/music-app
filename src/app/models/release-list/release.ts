@@ -9,4 +9,5 @@ export class Release {
     tracklist: Track[];
     artists: Artist[];
     images: ReleaseImage[];
+    uri: string;
 }

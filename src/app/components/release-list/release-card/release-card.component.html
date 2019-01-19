@@ -1,17 +1,26 @@
 <div class="release-card">
-    <div class="release-card__close-btn release-card__insignificant-info" (click)="closeReleaseCard()">X</div>
-    <div class="img-container release-card__img-container">
-        <img class="img-container__img" src="{{imageUrl}}" *ngIf="imageUrl" />
-        <img class="img-container__img" src="./assets/no-image-found.jpg" *ngIf="!imageUrl" />
+    <div class="rectangles-loader release-card__rectangles-loader" *ngIf="loadingStarted">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
-    <h2 class="release-card__title">{{release?.title}}</h2>
-    <p class="release-card__artists"><span class="release-card__insignificant-info">by</span> {{artists}}</p>
-    <p class="release-card__insignificant-info">{{release?.year}}</p>
-    <div class="tracklist release-card__tracklist">
-        <div class="track" *ngFor="let track of release?.tracklist">
-            <div class="track__position release-card__insignificant-info">{{track.position}}</div>
-            <div>{{track.title}}</div>
-            <div class="track__duration release-card__insignificant-info">{{track.duration}}</div>
+    <div class="release-card__release-card-content" *ngIf="release!=null">
+        <div class="release-card__close-btn release-card__insignificant-info" (click)="closeReleaseCard()">X</div>
+        <div class="img-container release-card__img-container">
+            <img class="img-container__img" src="{{imageUrl}}" *ngIf="imageUrl" />
+            <img class="img-container__img" src="./assets/no-image-found.jpg" *ngIf="!imageUrl" />
         </div>
+        <div class="release-card__title">{{release?.title}}</div>
+        <p class="release-card__artists"><span class="release-card__insignificant-info">by</span> {{artists}}</p>
+        <p class="release-card__insignificant-info">{{release?.year}}</p>
+        <table class="tracks-table release-card__tracks-table">
+            <tr *ngFor="let track of release?.tracklist">
+                <td *ngIf="isHeadingType(track)" colspan="3" class="tracks-table__track-heading-title">{{track.title}}</td>
+                <td *ngIf="isTrackType(track)" class="tracks-table__track-position">{{track.position}}</td>
+                <td *ngIf="isTrackType(track)">{{track.title}}</td>
+                <td *ngIf="isTrackType(track)">{{track.duration}}</td>
+            </tr>
+        </table>
+        <a href="{{release.uri}}" target="_blank" class="release-card__full-info-ref" *ngIf="release&&release.uri">View full info</a>
     </div>
 </div>

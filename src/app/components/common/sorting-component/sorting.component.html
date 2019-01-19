@@ -1,18 +1,17 @@
 <div class="sort-comp">
-    <div class="inline-block sort-comp__inline-block">
-        <div class="sort-comp__field-block">
-            <label class="sort-comp__form-elem-label" for="select">Sort by:</label>
-            <ng-select [items]="sortingFieldItems"
-                       [ngModel]="sortingField" 
-                       (change)="onSortingFieldChange($event)" 
-                       bindLabel="displayValue"
-                       class="sort-comp__ng-select"
-                       id="select">
-            </ng-select>
+    <div class="sort-comp__content">
+        <div class="sort-comp__inline-block">
+            <div class="sort-comp__field-block">
+                <label class="sort-comp__form-elem-label">Sort by:</label>
+                <ng-select [items]="sortingFieldItems"
+                           [ngModel]="sortingField" 
+                           (change)="onSortingFieldChange($event)" 
+                           bindLabel="displayValue"
+                           class="sort-comp__field-select">
+                </ng-select>
+            </div>
         </div>
-    </div>
-    <div class="inline-block">
-        <div class="sort-comp__sort-block">
+        <div class="sort-comp__inline-block">
             <label class="sort-comp__form-elem-label">Sort order:</label>
             <svg class="sort-comp__sort-svg" (click)="onSortingOrderChange(true)" 
                 [ngClass]="{'sort-comp__sort-svg_order-selected': isAscendingSortSelected }">

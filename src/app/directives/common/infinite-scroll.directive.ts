@@ -35,6 +35,9 @@ export class InfiniteScrollDirective
     sortingParams: SortingCondition;
 
     @Output()
+    loadingStarted = new EventEmitter();
+
+    @Output()
     dataLoaded = new EventEmitter<TSearchResult>();
 
     private currentPage = 1;
@@ -51,7 +54,7 @@ export class InfiniteScrollDirective
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if(changes && changes.sortingParams) {
+        if(changes && changes.sortingParams && !changes.sortingParams.firstChange) {
             this.currentPage = 1;
             this.totalPagesCount = 0;
             this.load();
@@ -60,7 +63,7 @@ export class InfiniteScrollDirective
 
     async load() {
         this.isLoading = true;
-
+        this.loadingStarted.emit();
         this.searchParams.page = this.currentPage;
         this.searchParams.per_page = this.itemsPerPage;
         this.searchParams.sort = this.sortingParams && this.sortingParams.sortingField 
@@ -78,6 +81,7 @@ export class InfiniteScrollDirective
         if(!this.isLoading
             && this.currentPage < this.totalPagesCount
             && this.checkScrollHeightCondition) {
+            
             this.load();
         }
     }

@@ -1,15 +1,27 @@
 .sort-comp {
     padding: 10px;
 }
-.sort-comp__inline-block {
+.sort-comp__content {
+    display: flex;
+    align-items: center;
+}
+.sort-comp__inline-block:not(:last-of-type) {
     margin-right: 15px;
+}
+.sort-comp__inline-block {
+    display: inline-block;
 }
 .sort-comp__field-block {
     display: flex;
     align-items: center;
 }
-.sort-comp__ng-select {
+.sort-comp__field-select {
     min-width: 150px;
+
+    .ng-select-container,
+    input {
+        cursor: pointer !important;
+    }
 }
 .sort-comp__form-elem-label {
     margin-right: 10px;

@@ -1,0 +1,35 @@
+.rectangles-loader {
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .rectangles-loader div {
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    width: 10px;
+    background: #000;
+    animation: rectangles-loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .rectangles-loader div:nth-child(1) {
+    left: 6px;
+    animation-delay: -0.24s;
+  }
+  .rectangles-loader div:nth-child(2) {
+    left: 26px;
+    animation-delay: -0.12s;
+  }
+  .rectangles-loader div:nth-child(3) {
+    left: 45px;
+    animation-delay: 0;
+  }
+  @keyframes rectangles-loader {
+    0% {
+      top: 6px;
+      height: 51px;
+    }
+    50%, 100% {
+      top: 19px;
+      height: 26px;
+    }
+  }

@@ -2,7 +2,6 @@ import { Component, ViewChild } from "@angular/core";
 import { ReleaseListApiService } from "src/app/services/release-list.apiservice";
 import { ReleaseSearchResultItem } from "src/app/models/release-list/release-search-result-item";
 import { ReleaseCardComponent } from "./release-card/release-card.component";
-import { Release } from "src/app/models/release-list/release";
 import { ReleaseSearchParameters } from "src/app/models/release-list/release-search-parameters";
 import { ReleaseSearchResult } from "src/app/models/release-list/release-search-result";
 import { SortingCondition } from "src/app/models/common/sorting/sorting-condition";
@@ -21,9 +20,11 @@ export class ReleaseListComponent {
     sortingFieldItems: SortingField[];
     searchParameters: ReleaseSearchParameters = new ReleaseSearchParameters();
     releaseList: ReleaseSearchResultItem[] = [];
-    selectedRelease: Release;
 
-    constructor(private releaseListApiService: ReleaseListApiService) {
+    cardShown = false;
+    loadingStarted = false;
+
+    constructor(public releaseListApiService: ReleaseListApiService) {
         this.initSearchParams();
         this.initSortFields();
     }
@@ -42,19 +43,25 @@ export class ReleaseListComponent {
     }
 
     async selectRelease(item: ReleaseSearchResultItem) {
-        this.selectedRelease = await this.releaseListApiService.getReleaseItem(item.id);
+        this.releaseCard.load(item.id);
+        this.cardShown = true;
     }
 
     onReleaseCardClosed() {
-        this.selectedRelease = null;
+        this.cardShown = false;
     }
     
     onDataLoaded(data: ReleaseSearchResult) {
+        this.loadingStarted = false;
         this.releaseList.push(...data.results);
     }
 
     onSortingConditionChanged(newCondition: SortingCondition) {
         this.sortingParameters = newCondition;
         this.releaseList = [];
+    }
+
+    onLoadingStarted() {
+        this.loadingStarted = true;
     }
 }

@@ -1,9 +1,8 @@
 
 export class ReleaseSearchResultItem {
     id: number;
-    resource_url: string;
+    uri: string;
     title: string;
-    cover_image: string;
     year: string;
     thumb: string;
     country: string;

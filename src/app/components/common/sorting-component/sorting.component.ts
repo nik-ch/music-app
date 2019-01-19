@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter, SimpleChanges, Input } from "@angular/core";
-import { SortingOrder } from "src/app/models/common/sorting/sorting-order";
+import { Component, Output, EventEmitter, Input } from "@angular/core";
+import { SortingOrderEnum } from "src/app/models/common/sorting/sorting-order.enum";
 import { SortingField } from "src/app/models/common/sorting/sorting-field";
 import { SortingCondition } from "src/app/models/common/sorting/sorting-condition";
 
@@ -15,7 +15,7 @@ export class SortingComponent {
     @Output()
     sortingConditionChanged = new EventEmitter<SortingCondition>();
 
-    sortingOrder: SortingOrder;
+    sortingOrder: SortingOrderEnum;
     sortingField: SortingField;
 
     private lastSortingState: SortingCondition;
@@ -25,11 +25,11 @@ export class SortingComponent {
     }
 
     get isAscendingSortSelected(): boolean {
-        return this.sortingOrder === SortingOrder.asc;
+        return this.sortingOrder === SortingOrderEnum.asc;
     }
 
     get isDescendingSortSelected(): boolean {
-        return this.sortingOrder === SortingOrder.desc;
+        return this.sortingOrder === SortingOrderEnum.desc;
     }
 
     onSortingFieldChange(newVal: SortingField) {
@@ -38,7 +38,7 @@ export class SortingComponent {
     }
 
     onSortingOrderChange(isUp: boolean) {
-        this.sortingOrder = isUp ? SortingOrder.asc : SortingOrder.desc;
+        this.sortingOrder = isUp ? SortingOrderEnum.asc : SortingOrderEnum.desc;
         this.emitSortingCondition();
     }
 
@@ -64,8 +64,8 @@ export class SortingComponent {
                     return true;
                 }
 
-            if(currentVal.sortingField.field != prevVal.sortingField.field
-                || currentVal.sortingOrder != prevVal.sortingOrder) {
+            if(currentVal.sortingOrder != prevVal.sortingOrder
+                || currentVal.sortingField && prevVal.sortingField && currentVal.sortingField.field != prevVal.sortingField.field) {
                     return true;
                 }
         }
