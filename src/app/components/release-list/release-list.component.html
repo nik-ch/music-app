@@ -19,13 +19,13 @@
                                [sortingFieldItems]="sortingFieldItems">
             </sorting-component>
             <div class="list list_display-flex">
-                <div class="list-item release-list__list-item " *ngFor="let releaseItem of releaseList">
+                <div class="list-item release-list__list-item " *ngFor="let releaseItem of releaseList" (click)="selectRelease(releaseItem)">
                     <div class="img-container release-list__img-container">
                         <img class="img-container__img" src="{{releaseItem.thumb}}" *ngIf="releaseItem.thumb" />
                         <img class="img-container__img" src="./assets/no-image-found.jpg" *ngIf="!releaseItem.thumb" />
                     </div>
                     <div class="release-list__release-info">
-                        <div class="release-list__release-title" (click)="selectRelease(releaseItem)">{{releaseItem.title}}</div>
+                        <div class="release-list__release-title">{{releaseItem.title}}</div>
                         <div class="release-list__release-year">{{releaseItem.year}}</div>
                     </div>
                 </div>

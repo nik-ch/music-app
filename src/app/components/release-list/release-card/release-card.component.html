@@ -8,7 +8,7 @@
         <div class="release-card__close-btn release-card__insignificant-info" (click)="closeReleaseCard()">X</div>
         <div class="img-container release-card__img-container">
             <img class="img-container__img" src="{{imageUrl}}" *ngIf="imageUrl" />
-            <img class="img-container__img" src="./assets/no-image-found.jpg" *ngIf="!imageUrl" />
+            <img class="img-container__img" src="/assets/no-image-found.jpg" *ngIf="!imageUrl" />
         </div>
         <div class="release-card__title">{{release?.title}}</div>
         <p class="release-card__artists"><span class="release-card__insignificant-info">by</span> {{artists}}</p>

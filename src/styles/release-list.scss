@@ -30,6 +30,7 @@ $card-appearance-transition-duration: 0.2s;
 .release-list__list-item {
     margin: $release-list-item-horizontal-margin;
     width: $release-list-item-width;
+    cursor: pointer;
 }
 .release-list__img-container {
     width: 100%;
@@ -38,9 +39,6 @@ $card-appearance-transition-duration: 0.2s;
 .release-list__release-year {
     color: $gray-label;
     font-size: 13px;
-}
-.release-list__release-title {
-    cursor: pointer;
 }
 .release-list__rectangles-loader {
     margin: auto;
