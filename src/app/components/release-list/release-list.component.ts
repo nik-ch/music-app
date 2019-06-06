@@ -13,7 +13,7 @@ import { SortingField } from "src/app/models/common/sorting/sorting-field";
 })
 export class ReleaseListComponent {
 
-    @ViewChild("releaseCard")
+    @ViewChild("releaseCard", { static: true })
     releaseCard: ReleaseCardComponent;
 
     sortingParameters: SortingCondition;    
